@@ -1,0 +1,77 @@
+package org.umc.spring.domain;
+
+import jakarta.persistence.*;
+import lombok.*;
+import org.umc.spring.domain.common.BaseEntity;
+import org.umc.spring.domain.enums.Gender;
+import org.umc.spring.domain.enums.SocialType;
+import org.umc.spring.domain.enums.MemberStatus;
+import org.umc.spring.domain.mapping.MemberAgree;
+import org.umc.spring.domain.mapping.MemberMission;
+import org.umc.spring.domain.mapping.MemberPrefer;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Getter
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+public class Member extends BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, length = 20)
+    private String name;
+
+    @Column(nullable = false, length = 20)
+    private String nickname;
+
+    @Column(nullable = false, length = 20)
+    private String socialId;
+
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "VARCHAR(10)")
+    private SocialType socialType;
+
+    @Column(nullable = false, length = 20)
+    private String phoneNumber;
+
+    @Column(nullable = false, length = 20)
+    private Boolean phoneVerified;
+
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "VARCHAR(10)")
+    private Gender gender;
+
+    @Column(nullable = false, length = 40)
+    private String address;
+
+    @Column(nullable = false, length = 50)
+    private String email;
+
+    private Integer point;
+
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "VARCHAR(10)")
+    private MemberStatus status;
+
+    private LocalDate inactiveDate;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MemberAgree> memberAgrees = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MemberPrefer> memberPrefers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MemberMission> memberMissions = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
+
+}
