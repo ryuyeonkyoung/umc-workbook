@@ -1,5 +1,6 @@
 package org.umc.spring.domain.enums;
 
 public enum StoreStatus {
-    OPEN, CLOSED
+    OPERATING, // 폐업하지 않음
+    TERMINATED // 폐업됨
 }

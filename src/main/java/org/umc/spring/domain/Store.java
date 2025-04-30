@@ -5,8 +5,8 @@ import lombok.*;
 import org.umc.spring.domain.common.BaseEntity;
 import org.umc.spring.domain.enums.StoreStatus;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 
 @Entity
 @Getter
@@ -29,5 +29,20 @@ public class Store extends BaseEntity {
     private Float score;
 
     @Enumerated(EnumType.STRING)
-    private StoreStatus status;
+    private StoreStatus status; // 폐점 여부
+
+    // 주 1회 정기휴무
+    @Enumerated(EnumType.STRING)
+    private DayOfWeek closedDay;
+
+    // 여러 요일 휴무
+    // @ElementCollection
+    // private List<DayOfWeek> closedDays = new ArrayList<>();
+
+    @Column(nullable = false)
+    private LocalTime openTime;
+
+    @Column(nullable = false)
+    private LocalTime closeTime;
+
 }
