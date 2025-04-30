@@ -24,12 +24,6 @@ public class Comment extends BaseEntity {
     @JoinColumn(name = "review_id")
     private Review review;
 
-    @Column(nullable = false, length = 500)
-    private String content;
-
-    @Enumerated(EnumType.STRING)
-    private CommentStatus status;
-
     //  대댓글 기능을 위한 자기참조 연관관계 설정
 
     // 부모 댓글을 참조 (null이면 최상위 댓글)
@@ -43,4 +37,12 @@ public class Comment extends BaseEntity {
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
     @OrderBy("createdAt ASC") // 등록한 순서대로 정렬
     private List<Comment> children = new ArrayList<>();
+
+    @Column(nullable = false, length = 500)
+    private String content;
+
+    @Enumerated(EnumType.STRING)
+    private CommentStatus status;
+
+
 }

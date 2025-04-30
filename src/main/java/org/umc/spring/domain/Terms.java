@@ -19,6 +19,9 @@ public class Terms extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToMany(mappedBy = "terms", cascade = CascadeType.ALL)
+    private List<MemberAgree> memberAgreeList = new ArrayList<>();
+
     @Column(nullable = false, length = 50)
     private String title;
 
@@ -26,7 +29,4 @@ public class Terms extends BaseEntity {
     private String body;
 
     private Boolean optional;
-
-    @OneToMany(mappedBy = "terms", cascade = CascadeType.ALL)
-    private List<MemberAgree> memberAgreeList = new ArrayList<>();
 }

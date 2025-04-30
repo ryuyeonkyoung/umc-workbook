@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.umc.spring.domain.common.BaseEntity;
 import org.umc.spring.domain.enums.Gender;
-import org.umc.spring.domain.enums.SocialType;
 import org.umc.spring.domain.enums.MemberStatus;
+import org.umc.spring.domain.enums.SocialType;
 import org.umc.spring.domain.mapping.MemberAgree;
 import org.umc.spring.domain.mapping.MemberMission;
 import org.umc.spring.domain.mapping.MemberPrefer;
@@ -24,6 +24,18 @@ public class Member extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MemberAgree> memberAgrees = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MemberPrefer> memberPrefers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MemberMission> memberMissions = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
 
     @Column(nullable = false, length = 20)
     private String name;
@@ -54,24 +66,13 @@ public class Member extends BaseEntity {
     @Column(nullable = false, length = 50)
     private String email;
 
-    private Integer point;
+    @Column(nullable = false)
+    private Integer point = 0; // 초기값 설정
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "VARCHAR(10)")
     private MemberStatus status;
 
     private LocalDate inactiveDate;
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MemberAgree> memberAgrees = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MemberPrefer> memberPrefers = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MemberMission> memberMissions = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Review> reviews = new ArrayList<>();
 
 }

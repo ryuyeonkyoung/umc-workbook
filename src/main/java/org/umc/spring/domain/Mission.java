@@ -31,6 +31,7 @@ public class Mission extends BaseEntity {
     @Column(nullable = false, length = 40)
     private String address;
 
+    @Column(nullable = false)
     private LocalDate deadline;
 
     @Enumerated(EnumType.STRING)

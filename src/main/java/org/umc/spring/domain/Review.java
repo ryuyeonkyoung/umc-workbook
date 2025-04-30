@@ -19,12 +19,6 @@ public class Review extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 100)
-    private String title;
-
-    @Column(nullable = false)
-    private Float score;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
@@ -38,6 +32,12 @@ public class Review extends BaseEntity {
 
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
     private List<Comment> commentList = new ArrayList<>();
+
+    @Column(nullable = false, length = 100)
+    private String title;
+
+    @Column(nullable = false)
+    private Float score;
 
     @Enumerated(EnumType.STRING)
     private ReviewStatus status;
