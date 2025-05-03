@@ -12,7 +12,9 @@ import org.umc.spring.domain.mapping.MemberPrefer;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -26,15 +28,17 @@ public class Member extends BaseEntity {
     private Long id;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MemberAgree> memberAgrees = new ArrayList<>();
+    private Set<MemberAgree> memberAgrees = new HashSet<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MemberPrefer> memberPrefers = new ArrayList<>();
+    private Set<MemberPrefer> memberPrefers = new HashSet<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MemberMission> memberMissions = new ArrayList<>();
+    private Set<MemberMission> memberMissions = new HashSet<>();
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    // 순서 보장, 페이징
+    // orphanRemoval 보류: 탈퇴한 유저의 리뷰를 유지하거나 삭제할 수 있음
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Review> reviews = new ArrayList<>();
 
     @Column(nullable = false, length = 20)

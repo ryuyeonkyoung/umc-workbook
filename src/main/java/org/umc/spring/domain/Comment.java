@@ -34,6 +34,7 @@ public class Comment extends BaseEntity {
     private Comment parent;
 
     // 자식 댓글 목록  (1-depth)
+    // orphanRemoval 금지: 부모 댓글 삭제 시에도 자식 댓글은 남겨야 함
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
     @OrderBy("createdAt ASC") // 등록한 순서대로 정렬
     private List<Comment> children = new ArrayList<>();

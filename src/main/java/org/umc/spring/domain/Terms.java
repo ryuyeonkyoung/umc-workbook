@@ -5,8 +5,8 @@ import lombok.*;
 import org.umc.spring.domain.common.BaseEntity;
 import org.umc.spring.domain.mapping.MemberAgree;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -19,8 +19,8 @@ public class Terms extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "terms", cascade = CascadeType.ALL)
-    private List<MemberAgree> memberAgreeList = new ArrayList<>();
+    @OneToMany(mappedBy = "terms", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<MemberAgree> memberAgreeList = new HashSet<>();
 
     @Column(nullable = false, length = 50)
     private String title;
