@@ -74,7 +74,7 @@ public class Member extends BaseEntity {
     private Integer point = 0; // 초기값 설정
 
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "VARCHAR(10)")
+    @Column(columnDefinition = "VARCHAR(10) DEFAULT 'ACTIVE'")
     private MemberStatus status;
 
     private LocalDate inactiveDate;

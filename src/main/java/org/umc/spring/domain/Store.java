@@ -29,10 +29,12 @@ public class Store extends BaseEntity {
     private Float score;
 
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "VARCHAR(15) DEFAULT 'OPERATING'")
     private StoreStatus status; // 폐점 여부
 
     // 주 1회 정기휴무
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private DayOfWeek closedDay;
 
     // 여러 요일 휴무

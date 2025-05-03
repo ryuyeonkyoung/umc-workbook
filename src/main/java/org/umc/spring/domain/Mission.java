@@ -35,5 +35,6 @@ public class Mission extends BaseEntity {
     private LocalDate deadline;
 
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "VARCHAR(15) DEFAULT 'CHALLENGING'")
     private MissionStatus status;
 }

@@ -42,5 +42,6 @@ public class Review extends BaseEntity {
     private Float score;
 
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "VARCHAR(10) DEFAULT 'ACTIVE'")
     private ReviewStatus status;
 }
