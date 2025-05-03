@@ -22,6 +22,9 @@ public class Terms extends BaseEntity {
     @OneToMany(mappedBy = "terms", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<MemberAgree> memberAgreeList = new HashSet<>();
 
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String content;
+
     @Column(nullable = false, length = 50)
     private String title;
 

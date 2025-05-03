@@ -22,7 +22,9 @@ public class Mission extends BaseEntity {
     @JoinColumn(name = "store_id")
     private Store store;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String missionSpec;
+
     private Integer minSpendMoney;
 
     @Column(nullable = false)
@@ -37,4 +39,20 @@ public class Mission extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "VARCHAR(15) DEFAULT 'CHALLENGING'")
     private MissionStatus status;
+
+    @PrePersist
+    public void prePersist() {
+        if (this.deadline == null) {
+            this.deadline = LocalDate.now().plusDays(7);
+        }
+        if (this.status == null) {
+            this.status = MissionStatus.CHALLENGING;
+        }
+        if (this.rewardPoints == null) {
+            this.rewardPoints = 0;
+        }
+        if (this.address == null) {
+            this.address = "미지정";
+        }
+    }
 }

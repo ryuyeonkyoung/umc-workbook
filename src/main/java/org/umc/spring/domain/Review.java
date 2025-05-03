@@ -35,8 +35,8 @@ public class Review extends BaseEntity {
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> commentList = new ArrayList<>();
 
-    @Column(nullable = false, length = 100)
-    private String title;
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String context;
 
     @Column(nullable = false)
     private Float score;

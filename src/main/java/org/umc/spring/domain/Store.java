@@ -19,6 +19,10 @@ public class Store extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "region_id", nullable = false)
+    private Region region;
+
     @Column(nullable = false, length = 50)
     private String name;
 
@@ -41,10 +45,21 @@ public class Store extends BaseEntity {
     // @ElementCollection
     // private List<DayOfWeek> closedDays = new ArrayList<>();
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TIME DEFAULT '08:00:00'")
     private LocalTime openTime;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TIME DEFAULT '23:59:00'")
     private LocalTime closeTime;
+
+    @Override
+    public String toString() {
+        return "Store{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", score=" + score +
+                ", region=" + (region != null ? region.getName() : "N/A") + // region의 이름 출력
+                '}';
+    }
 
 }
