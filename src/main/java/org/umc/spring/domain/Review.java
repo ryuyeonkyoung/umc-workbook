@@ -39,7 +39,7 @@ public class Review extends BaseEntity {
     private String context;
 
     @Column(nullable = false)
-    private Float score;
+    private Float rating;
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "VARCHAR(10) DEFAULT 'ACTIVE'")
