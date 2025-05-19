@@ -28,4 +28,9 @@ public class MissionQueryServiceImpl implements MissionQueryService {
         boolean hasNext = missions.size() > pageable.getPageSize();
         return new SliceImpl<>(missions, pageable, hasNext);
     }
+
+    @Override
+    public boolean existsById(Long id) {
+        return missionRepository.existsById(id);
+    }
 }
